@@ -6,11 +6,11 @@ require("telekasten").setup({
   home = vim.fn.expand("~/Nextcloud/notes/"),
   vaults = {
     perso = {
-      home = vim.fn.expand("~/Nextcloud/notes/perso"),
+      home = vim.fn.expand("~/Nextcloud/notes/01_perso"),
       templates = vim.fn.expand("~/Nextcloud/notes/templates"),
     },
-    pro = {
-      home = vim.fn.expand("~/Nextcloud/notes/pro/"),
+    travail = {
+      home = vim.fn.expand("~/Nextcloud/notes/02_travail/"),
       templates = vim.fn.expand("~/Nextcloud/notes/templates"),
     },
   },
@@ -35,6 +35,7 @@ require("mason-lspconfig").setup({
     "pyright",
   },
 })
+
 require("mason-tool-installer").setup({
   -- Install these linters, for
   "black",
