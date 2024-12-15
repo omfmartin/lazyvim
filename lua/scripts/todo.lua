@@ -29,24 +29,24 @@ function _G.mark_not_done()
 end
 
 -- Create new TODO
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "*.md",
-  callback = function()
-    vim.keymap.set("i", "<CR>", function()
-      local line = vim.api.nvim_get_current_line()
-      local indentation = line:match("^%s*") or "" -- Capture leading whitespace
-      local checkbox = line:match("^%s*%- %[[x ]%]") -- Match `- [ ]` or `- [x]`
-
-      if checkbox then
-        -- Continue with the same checkbox format
-        return "\n" .. indentation .. "- [ ] "
-      else
-        -- Default behavior: just a new line
-        return "\n"
-      end
-    end, { buffer = true, expr = true })
-  end,
-})
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   pattern = "*.md",
+--   callback = function()
+--     vim.keymap.set("i", "<CR>", function()
+--       local line = vim.api.nvim_get_current_line()
+--       local indentation = line:match("^%s*") or "" -- Capture leading whitespace
+--       local checkbox = line:match("^%s*%- %[[x ]%]") -- Match `- [ ]` or `- [x]`
+--
+--       if checkbox then
+--         -- Continue with the same checkbox format
+--         return "\n" .. indentation .. "- [ ] "
+--       else
+--         -- Default behavior: just a new line
+--         return "\n"
+--       end
+--     end, { buffer = true, expr = true })
+--   end,
+-- })
 
 -- Keybindings
 vim.api.nvim_set_keymap("n", "<leader>tc", ":lua create_todo()<CR>", { noremap = true, silent = true })
