@@ -22,3 +22,8 @@ vim.keymap.set("n", "<leader>zI", "<cmd>Telekasten insert_img_link<CR>")
 
 -- Call insert link automatically when we start typing a link
 vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
+
+-- Buffer
+----------------------------------------------------------------------------------------------------------------------
+vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
