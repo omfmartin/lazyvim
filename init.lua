@@ -6,11 +6,11 @@ require("telekasten").setup({
   home = vim.fn.expand("~/Nextcloud/notes/"),
   vaults = {
     perso = {
-      home = vim.fn.expand("~/Nextcloud/notes/01_perso"),
+      home = vim.fn.expand("~/Nextcloud/notes/1_perso"),
       templates = vim.fn.expand("~/Nextcloud/notes/templates"),
     },
     travail = {
-      home = vim.fn.expand("~/Nextcloud/notes/02_travail/"),
+      home = vim.fn.expand("~/Nextcloud/notes/2_travail/"),
       templates = vim.fn.expand("~/Nextcloud/notes/templates"),
     },
   },
@@ -50,7 +50,7 @@ require("mason-tool-installer").setup({
 require("scripts.todo")
 
 -- Compiler for windows
--- require("nvim-treesitter.install").compilers = { "clang" }
+require("nvim-treesitter.install").compilers = { "clang" }
 
 -- Vertical line
 vim.opt.colorcolumn = "119"

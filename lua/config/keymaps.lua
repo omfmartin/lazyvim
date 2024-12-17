@@ -3,7 +3,19 @@
 -- Add any additional keymaps here
 
 -- Remap Esc
-vim.keymap.set({ "i", "v", "c" }, "jk", "<Esc>", { noremap = true, silent = true })
+vim.keymap.set({ "i", "v", "c" }, "jk", "<Esc>", { noremap = true, silent = true, desc = "Enter normal mode" })
+
+-- Delete everything
+vim.keymap.set("n", "<leader>dd", ":%d<CR>", { noremap = true, silent = true, desc = "Delete everything" })
+vim.keymap.set(
+  "n",
+  "<leader>dD",
+  ":%d_<CR>",
+  { noremap = true, silent = true, desc = "Delete everything (black hole)" }
+)
+
+-- Yank everything
+vim.keymap.set("n", "<leader>yy", ":%y<CR>", { noremap = true, silent = true, desc = "Yank everything" })
 
 -- Telekasten
 ----------------------------------------------------------------------------------------------------------------------
