@@ -1,4 +1,4 @@
 return {
-  { "junegunn/fzf", enabled = false },
-  { "ibhagwan/fzf-lua", enabled = false },
+  { "junegunn/fzf", enabled = true },
+  { "ibhagwan/fzf-lua", enabled = true },
 }
