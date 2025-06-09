@@ -5,6 +5,12 @@
 -- Remap Esc
 vim.keymap.set({ "i", "v", "c" }, "jk", "<Esc>", { noremap = true, silent = true, desc = "Enter normal mode" })
 
+-- Non-yanking deletes (normal mode)
+vim.keymap.set("n", "Q", '"_dd', { desc = "Delete line without yanking" }) -- Q = quick delete line
+vim.keymap.set("n", "X", '"_x', { desc = "Delete character without yanking" })
+vim.keymap.set("n", "DW", '"_dw', { desc = "Delete word without yanking" })
+vim.keymap.set("n", "DE", '"_D', { desc = "Delete to end of line without yanking" })
+
 -- Delete everything
 vim.keymap.set("n", "<leader>dd", ":%d<CR>", { noremap = true, silent = true, desc = "Delete everything" })
 vim.keymap.set(
@@ -39,3 +45,11 @@ vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
 ----------------------------------------------------------------------------------------------------------------------
 vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
+
+-- Move to end of current word
+vim.keymap.set("n", "<C-Right>", "e", { noremap = true })
+vim.keymap.set("i", "<C-Right>", "<C-o>e", { noremap = true })
+
+-- Move to beginning of previous word
+vim.keymap.set("n", "<C-Left>", "b", { noremap = true })
+vim.keymap.set("i", "<C-Left>", "<C-o>b", { noremap = true })

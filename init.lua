@@ -51,6 +51,3 @@ require("scripts.todo")
 
 -- Compiler for windows
 require("nvim-treesitter.install").compilers = { "clang" }
-
--- Vertical line
-vim.opt.colorcolumn = "119"
