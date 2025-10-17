@@ -3,15 +3,11 @@ require("config.lazy")
 
 -- Telekasten settings
 require("telekasten").setup({
-  home = vim.fn.expand("~/Nextcloud/notes/"),
+  home = vim.fn.expand("~/Documents/notes/"),
   vaults = {
     perso = {
-      home = vim.fn.expand("~/Nextcloud/notes/1_perso"),
-      templates = vim.fn.expand("~/Nextcloud/notes/templates"),
-    },
-    travail = {
-      home = vim.fn.expand("~/Nextcloud/notes/2_travail/"),
-      templates = vim.fn.expand("~/Nextcloud/notes/templates"),
+      home = vim.fn.expand("~/Documents/notes/"),
+      templates = vim.fn.expand("~/Documents/notes/templates"),
     },
   },
 })
@@ -50,4 +46,4 @@ require("mason-tool-installer").setup({
 require("scripts.todo")
 
 -- Compiler for windows
-require("nvim-treesitter.install").compilers = { "clang" }
+-- require("nvim-treesitter.install").compilers = { "clang" }
