@@ -28,28 +28,46 @@ function _G.mark_not_done()
   vim.api.nvim_set_current_line(updated_line)
 end
 
--- Create new TODO
--- vim.api.nvim_create_autocmd("BufEnter", {
---   pattern = "*.md",
---   callback = function()
---     vim.keymap.set("i", "<CR>", function()
---       local line = vim.api.nvim_get_current_line()
---       local indentation = line:match("^%s*") or "" -- Capture leading whitespace
---       local checkbox = line:match("^%s*%- %[[x ]%]") -- Match `- [ ]` or `- [x]`
---
---       if checkbox then
---         -- Continue with the same checkbox format
---         return "\n" .. indentation .. "- [ ] "
---       else
---         -- Default behavior: just a new line
---         return "\n"
---       end
---     end, { buffer = true, expr = true })
---   end,
--- })
-
 -- Keybindings
 vim.api.nvim_set_keymap("n", "<leader>tc", ":lua create_todo()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>td", ":lua mark_done()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>ts", ":lua mark_started()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>tn", ":lua mark_not_done()<CR>", { noremap = true, silent = true })
+
+function _G.auto_continue_list()
+  local line = vim.api.nvim_get_current_line()
+  local indent = line:match("^(%s*)") or ""
+
+  -- Match list bullets or markdown todo items
+  local checkbox = line:match("^%s*%- %[[ x%-]%]")
+  local bullet = line:match("^%s*%- ")
+
+  -- If it's a checkbox list item
+  if checkbox then
+    -- If it's just "- [ ]" or "- [x]" or "- [-]" with nothing else, stop continuation
+    if line:match("^%s*%- %[[ x%-]%]%s*$") then
+      return "\n"
+    end
+    return "\n" .. indent .. "- [ ] "
+  end
+
+  -- If it's a plain list item
+  if bullet then
+    -- If line only contains "- " and nothing else, stop continuation
+    if line:match("^%s*%-%s*$") then
+      return "\n"
+    end
+    return "\n" .. indent .. "- "
+  end
+
+  -- Default Enter behavior
+  return "\n"
+end
+
+-- Apply only for Markdown files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.keymap.set("i", "<CR>", "v:lua.auto_continue_list()", { expr = true, noremap = true, silent = true })
+  end,
+})
