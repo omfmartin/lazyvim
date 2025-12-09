@@ -36,31 +36,31 @@ vim.api.nvim_set_keymap("n", "<leader>tn", ":lua mark_not_done()<CR>", { noremap
 
 function _G.auto_continue_list()
   local line = vim.api.nvim_get_current_line()
-  local indent = line:match("^(%s*)") or ""
 
-  -- Match list bullets or markdown todo items
-  local checkbox = line:match("^%s*%- %[[ x%-]%]")
-  local bullet = line:match("^%s*%- ")
+  -- Strip leading spaces before evaluating
+  local trimmed = line:gsub("^%s+", "")
 
-  -- If it's a checkbox list item
+  local checkbox = trimmed:match("^%- %[[ x%-]%]")
+  local bullet = trimmed:match("^%- ")
+
+  -- Checkbox list item
   if checkbox then
-    -- If it's just "- [ ]" or "- [x]" or "- [-]" with nothing else, stop continuation
-    if line:match("^%s*%- %[[ x%-]%]%s*$") then
+    -- If it's just "- [ ]" or "- [x]" etc., stop continuation
+    if trimmed:match("^%- %[[ x%-]%]%s*$") then
       return "\n"
     end
-    return "\n" .. indent .. "- [ ] "
+    return "\n- [ ] "
   end
 
-  -- If it's a plain list item
+  -- Plain bullet list item
   if bullet then
-    -- If line only contains "- " and nothing else, stop continuation
-    if line:match("^%s*%-%s*$") then
+    if trimmed:match("^%-%s*$") then
       return "\n"
     end
-    return "\n" .. indent .. "- "
+    return "\n- "
   end
 
-  -- Default Enter behavior
+  -- Default Enter
   return "\n"
 end
 
