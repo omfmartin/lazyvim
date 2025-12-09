@@ -4,6 +4,7 @@
 
 -- Remap Esc
 vim.keymap.set({ "i", "v", "c" }, "jk", "<Esc>", { noremap = true, silent = true, desc = "Enter normal mode" })
+vim.keymap.set({ "i", "v", "c" }, "kj", "<Esc>", { noremap = true, silent = true, desc = "Enter normal mode" })
 
 -- Non-yanking deletes (normal mode)
 vim.keymap.set("n", "Q", '"_dd', { desc = "Delete line without yanking" }) -- Q = quick delete line
